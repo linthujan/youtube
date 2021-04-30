@@ -1,37 +1,32 @@
+//ESP8266 MASTER
 #include <Wire.h>
 
 char c;
 String data;
-String p;
-String q;
-String r;
-String s;
-int indexofp;
-int indexofq;
-int indexofr;
-int indexofs;
+String p,q,r,s;
+int indexofp,indexofq,indexofr,indexofs;
 
 void setup() {
- Serial.begin(115200);
- Wire.begin(0,2);
+ Serial.begin(115200); //start serial monitor
+ Wire.begin(0,2); // begin i2c communication sda=0,scl=2
 }
 
 void loop() {
- Wire.requestFrom(8,25);
+ Wire.requestFrom(8,25); // i2c slave address and recived value count
  while(Wire.available()){
-    c = Wire.read();
+    c = Wire.read(); //store received charactor
  if(c=='\n') {break;}
- else  {data+=c;}
+ else  {data+=c;} // store received charactors to string (data)
  }
  
  if(c=='\n')
  {
-   parsestring();
+   parsestring(); // extract serial data 
    Serial.println("p : "+ p);
    Serial.println("q : "+ q);
    Serial.println("r : "+ r);
    Serial.println("s : "+ s);
-   c=0;
+   c=0;  // reset variables
    data="";
  }
  
