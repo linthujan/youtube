@@ -1,13 +1,13 @@
+// SLAVE ARDUINO
 #include <Wire.h>
 void setup() {
-  // put your setup code here, to run once:
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
   pinMode(A2, INPUT);
   pinMode(A3, INPUT);
-  Serial.begin(115200);
-  Wire.begin(8);                /* join i2c bus with address 8 */
-  Wire.onRequest(requestEvent);
+  Serial.begin(115200); //begin serial monitor
+  Wire.begin(8); //begin i2c with address
+  Wire.onRequest(requestEvent); //send data to master
   Serial.print("Hi !");
 }
 
@@ -36,5 +36,5 @@ void requestEvent() {
   Wire.print("S");
   Serial.print("s");
   Serial.println(s);
-  Wire.print("\n");
+  Wire.print("\n"); // to stop read when complete one cycle
 }
